@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="cn.bcsp.mall.mapper.ProductMapper">
+
+    <select id="selectProductByCategoryId2" parameterType="int" resultType="cn.bcsp.mall.pojo.Product">
+         SELECT * FROM product WHERE productCategoryId=#{categoryId} AND
+           productIsEnabled IN(0,2)
+           ORDER BY productId DESC  LIMIT  #{startRow},#{pageSize}
+    </select>
+
+    <select id="selectCount" parameterType="int" resultType="int">
+        select count(*) from product where productCategoryId=#{categoryId}
+    </select>
+
+
+    <select id="selectOne" resultType="cn.bcsp.mall.pojo.Product" parameterType="int">
+        select * from product where productId=#{productId}
+    </select>
+
+
+    <select id="count" resultType="int" parameterType="string">
+        select count(*) from product
+         where productName like concat('%',#{productName},'%')
+           and
+          productIsEnabled IN(0,2)
+    </select>
+
+    <select id="saleCount" resultType="int">
+        SELECT SUM(productorderitemNumber)
+              FROM productorderitem WHERE productorderitemproductId=#{pid}
+    </select>
+
+    <select id="selectProductByCategoryId" resultType="cn.bcsp.mall.pojo.Product">
+      SELECT * FROM product WHERE productCategoryId=#{categoryId} AND
+           productIsEnabled IN(0,2)  ORDER BY productId DESC  LIMIT 8
+     </select>
+
+    <select id="selectProductByProductIsEnabled" resultType="cn.bcsp.mall.pojo.Product">
+        SELECT * FROM product WHERE productIsEnabled=#{productIsEnabled}
+        LIMIT #{size}
+    </select>
+
+    <select id="selectProductByName" resultType="cn.bcsp.mall.pojo.Product">
+        select * from product
+              where productName like concat('%',#{productName},'%') and
+          productIsEnabled IN(0,2)  limit #{startRow},#{pageSize}
+    </select>
+
+</mapper>

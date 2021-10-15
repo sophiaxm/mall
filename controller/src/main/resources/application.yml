@@ -1,0 +1,29 @@
+server:
+  port: 9090
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  mvc:
+    view:
+      prefix: /WEB-INF/page/
+      suffix: .jsp
+  datasource:
+    username: root
+    password: ok
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+  type-aliases-package: cn.bcsp.mall.pojo
+  mapper-locations: classpath:cn/bcsp/mall/mapper/*Mapper.xml
+
+logging:
+  level:
+    root: info
+    cn.bcsp.mall.mapper: debug
+  config: classpath:logback-spring.xml

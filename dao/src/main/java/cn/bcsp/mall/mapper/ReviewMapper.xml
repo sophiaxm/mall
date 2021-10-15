@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="cn.bcsp.mall.mapper.ReviewMapper">
+
+    <select id="selecCount" resultType="int" parameterType="int">
+      SELECT COUNT(reviewId) FROM review WHERE reviewProductId=#{productId}
+    </select>
+
+</mapper>

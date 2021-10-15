@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="cn.bcsp.mall.mapper.ProductOrderItemMapper">
+
+    <delete id="delete">
+        delete  from  productorderitem where productorderitemId=#{productOrderItemId}
+    </delete>
+
+    <insert id="insert" parameterType="cn.bcsp.mall.pojo.ProductOrderItem">
+      insert into productorderitem(productorderitemId,productorderitemNumber,
+      productorderitemPrice,productorderitemProductId,productorderitemOrderId,
+      productorderitemUserId,productorderitemUserMessage)
+       values(#{productOrderItemId},#{productOrderItemNumber},#{productOrderItemPrice},
+       #{productOrderItemProductId},#{productOrderItemOrderId},
+       #{productOrderItemUserId},#{productOrderItemUserMessage})
+    </insert>
+
+    <select id="selectAllByUserId" parameterType="int"
+                            resultType="cn.bcsp.mall.pojo.ProductOrderItem">
+        SELECT * FROM productorderitem WHERE
+             productorderitemOrderId IS NULL AND productorderitemuserId=#{userId}
+    </select>
+
+    <update id="updateProductOrderItem">
+        UPDATE productorderitem
+           SET productorderitemNumber = productorderitemNumber + #{productNumber}
+         WHERE
+            productorderitemProductId=#{productId}
+            AND
+               productorderitemuserId=#{userId}
+            AND
+               productorderitemOrderId IS NULL
+    </update>
+
+</mapper>
